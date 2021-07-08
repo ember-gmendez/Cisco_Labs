@@ -19,7 +19,7 @@ line con 0
  exit
 !
 line vty 0 4
- logg sycnh
+ logg synch
  login local
  transport input ssh
  exec-timeout 10 0
@@ -55,8 +55,43 @@ banner motd $
     enjoy life
 $
 !
-int g0/0
-desc link to sw_1
-ip address 192.168.1.254 255.255.255.0
-no shut
+int gi0/0
+ description link to mgmt
+ ip address 192.168.1.254 255.255.255.0
+ no shutdown
+ exit
 !
+int gi0/1
+ description link to rtr_2
+ ip address 10.0.0.1 255.255.255.252
+ no shutdown
+ exit
+!
+int gi0/2
+ description link to rtr_3
+ ip address 10.0.0.5 255.255.255.252
+ no shutdown
+ exit
+!
+int gi0/3
+ description disabled
+ shutdown
+ exit
+!
+int lo0
+ description router-id
+ ip address 1.1.1.1 255.255.255.255
+ no shutdown
+ exit
+!
+ip route 0.0.0.0 0.0.0.0 192.168.1.1 name def_route_outside
+!
+router ospf 1
+ network 10.0.0.0 0.0.0.3 area 0
+ network 10.0.0.4 0.0.0.3 area 0
+ network 1.1.1.1 0.0.0.0 area 0
+ redistribute connected metric 1
+ exit
+!
+end
+copy run start

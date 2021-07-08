@@ -19,7 +19,7 @@ line con 0
  exit
 !
 line vty 0 4
- logg sycnh
+ logg synch
  login local
  transport input ssh
  exec-timeout 10 0
@@ -54,9 +54,4 @@ banner motd $
     '-------'
     enjoy life
 $
-!
-int g0/0
-desc link to sw_1
-ip address 192.168.1.254 255.255.255.0
-no shut
 !
