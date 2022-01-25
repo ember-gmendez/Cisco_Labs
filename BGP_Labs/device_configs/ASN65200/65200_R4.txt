@@ -1,12 +1,12 @@
-rtr_3
+ASN65200 R4
 
 enable
 config t
 !
-hostname rtr_3
+hostname 65200_R4
 !
 no ip domain-lookup
-ip domain-name bgp65100.lab
+ip domain-name bgp65200.lab
 !
 enable secret cisco
 username admin priv 15 secret cisco
@@ -58,39 +58,40 @@ banner motd $
 $
 !
 int gi0/0
- description iBGP to rtr_7
- ip address 10.1.37.3 255.255.255.0
+ description iBGP: 65200_R1
+ ip address 10.2.14.4 255.255.255.0
+ no shutdown
  exit
 !
 int gi0/1
- description iBGP to rtr_1
- ip address 10.1.13.3 255.255.255.0
+ description iBGP: 65200_R2
+ ip address 10.2.24.4 255.255.255.0
  no shutdown
  exit
 !
 int gi0/2
- description iBGP to rtr_4
- ip address 10.1.34.3 255.255.255.0
+ description iBGP: 65200_R3
+ ip address 10.2.34.4 255.255.255.0
  no shutdown
  exit
 !
 int g0/3
- description eBGP to rtr_8
- ip address 6.5.12.3 255.255.255.240
+ description eBGP: 65300_R3
+ ip address 6.5.23.4 255.255.255.248
  no shutdown
  exit
 !
 int lo0
  description Router-ID
- ip address 10.0.0.3 255.255.255.255
+ ip address 10.65.2.1 255.255.255.255
  no shutdown
  exit
 !
-router bgp 65100
- network 10.0.0.3 mask 255.255.255.255
- network 10.1.0.0 mask 255.255.0.0
- network 6.5.12.0 mask 255.255.255.240
- neighbor 6.5.12.8 remote-as 65200
+router bgp 65200
+ network 10.65.2.1 mask 255.255.255.255
+ network 10.2.0.0 mask 255.255.0.0
+ network 6.5.23.0 mask 255.255.255.248
+ neighbor 6.5.12.3 remote-as 65100
  exit
 !
 exit
