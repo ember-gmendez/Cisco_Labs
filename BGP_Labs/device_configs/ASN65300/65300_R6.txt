@@ -21,7 +21,7 @@ line con 0
  exit
 !
 line vty 0 4
- logg sycnh
+ logg synch
  login local
  transport input ssh
  exec-timeout 10 0
