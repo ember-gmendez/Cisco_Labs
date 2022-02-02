@@ -91,7 +91,7 @@ router bgp 65200
  network 10.65.2.4 mask 255.255.255.255
  network 10.2.0.0 mask 255.255.0.0
  network 6.5.23.0 mask 255.255.255.248
- neighbor 6.5.12.3 remote-as 65100
+ neighbor 6.5.23.3 remote-as 65300
  neighbor 10.2.14.1 remote-as 65200
  neighbor 10.2.24.2 remote-as 65200
  neighbor 10.2.34.3 remote-as 65200
