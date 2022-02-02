@@ -89,6 +89,9 @@ int lo0
 router bgp 65200
  network 10.65.2.3 mask 255.255.255.255
  network 10.2.0.0 mask 255.255.0.0
+ neighbor 10.2.13.1 remote-as 65200
+ neighbor 10.2.23.2 remote-as 65200
+ neighbor 10.2.34.4 remote-as 65200
  exit
 !
 exit

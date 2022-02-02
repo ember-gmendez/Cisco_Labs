@@ -92,6 +92,9 @@ router bgp 65200
  network 10.2.0.0 mask 255.255.0.0
  network 6.5.12.0 mask 255.255.255.248
  neighbor 6.5.12.3 remote-as 65100
+ neighbor 10.2.12.2 remote-as 65200
+ neighbor 10.2.13.3 remote-as 65200
+ neighbor 10.2.14.4 remote-as 65200
  exit
 !
 exit
