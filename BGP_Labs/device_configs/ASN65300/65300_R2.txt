@@ -90,9 +90,12 @@ int lo0
 router bgp 14
  bgp confederation identifier 65300
  bgp confederation peers 57
- neighbor 10.3.25.5 remote-as 57
  network 10.65.3.2 mask 255.255.255.255
  network 10.3.0.0 mask 255.255.0.0
+ neighbor 10.3.12.1 remote-as 14
+ neighbor 10.3.23.3 remote-as 14
+ neighbor 10.3.24.4 remote-as 14
+ neighbor 10.3.25.5 remote-as 57
  exit
 !
 exit

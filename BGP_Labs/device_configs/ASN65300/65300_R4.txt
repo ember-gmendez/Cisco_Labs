@@ -86,9 +86,15 @@ int lo0
  no shutdown
  exit
 !
-router bgp 65300
+router bgp 14
+ bgp confederation identifier 65300
+ bgp confederation peers 57
  network 10.65.3.4 mask 255.255.255.255
  network 10.3.0.0 mask 255.255.0.0
+ neighbor 10.3.14.1 remote-as 14
+ neighbor 10.3.24.2 remote-as 14
+ neighbor 10.3.34.3 remote-as 14
+ neighbor 10.3.45.5 remote-as 57
  exit
 !
 exit
