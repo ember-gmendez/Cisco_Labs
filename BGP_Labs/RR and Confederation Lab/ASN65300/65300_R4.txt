@@ -1,0 +1,109 @@
+ASN65300 R4
+
+enable
+config t
+!
+hostname 65300_R4
+!
+no ip domain-lookup
+ip domain-name bgp65300.lab
+!
+enable secret cisco
+username admin priv 15 secret cisco
+!
+crypto key generate rsa modulus 2048
+ip ssh version 2
+!
+line con 0
+ logg synch
+ login local
+ exec-timeout 10 0
+ exit
+!
+line vty 0 4
+ logg synch
+ login local
+ transport input ssh
+ exec-timeout 10 0
+ exit
+!
+no banner login
+no banner exec
+no banner incoming
+!
+banner motd $
+      _____
+     o|* *|o
+     o|* *|o
+     o|* *|o
+      \===/
+       |||
+       |||
+       |||
+       |||
+    ___|||___
+   /   |||   \
+  /    |||    \
+ |     |||     |
+  \   (|||)   /
+   |   |||   |
+  /    |||    \
+ /     |||     \
+/      |||      \
+|     [===]     |
+ \             /
+  '.         .'
+    '-------'
+    enjoy life
+$
+!
+int gi0/0
+ description iBGP: 65300_R1
+ ip address 10.3.14.4 255.255.255.0
+ no shutdown
+ exit
+!
+int gi0/1
+ description iBGP: 65300_R2
+ ip address 10.3.24.4 255.255.255.0
+ no shutdown
+ exit
+!
+int gi0/2
+ description iBGP: 65300_R3
+ ip address 10.3.34.4 255.255.255.0
+ no shutdown
+ exit
+!
+int g0/3
+ description iBGP: 65300_R5
+ ip address 10.3.45.4 255.255.255.0
+ no shutdown
+ exit
+!
+int lo0
+ description Router-ID
+ ip address 10.65.3.4 255.255.255.255
+ no shutdown
+ exit
+!
+router ospf 65300
+ network 10.3.14.0 0.0.0.255 area 0
+ network 10.3.24.0 0.0.0.255 area 0
+ network 10.3.34.0 0.0.0.255 area 0
+ network 10.3.45.0 0.0.0.255 area 0
+ exit
+!
+router bgp 14
+ bgp confederation identifier 65300
+ bgp confederation peers 57
+ network 10.65.3.4 mask 255.255.255.255
+ network 10.3.0.0 mask 255.255.0.0
+ neighbor 10.3.14.1 remote-as 14
+ neighbor 10.3.24.2 remote-as 14
+ neighbor 10.3.34.3 remote-as 14
+ neighbor 10.3.45.5 remote-as 57
+ exit
+!
+exit
+copy run start

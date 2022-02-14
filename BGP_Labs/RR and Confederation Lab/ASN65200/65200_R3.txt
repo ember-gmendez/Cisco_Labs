@@ -1,0 +1,98 @@
+ASN65200 R3
+
+enable
+config t
+!
+hostname 65200_R3
+!
+no ip domain-lookup
+ip domain-name bgp65200.lab
+!
+enable secret cisco
+username admin priv 15 secret cisco
+!
+crypto key generate rsa modulus 2048
+ip ssh version 2
+!
+line con 0
+ logg synch
+ login local
+ exec-timeout 10 0
+ exit
+!
+line vty 0 4
+ logg synch
+ login local
+ transport input ssh
+ exec-timeout 10 0
+ exit
+!
+no banner login
+no banner exec
+no banner incoming
+!
+banner motd $
+      _____
+     o|* *|o
+     o|* *|o
+     o|* *|o
+      \===/
+       |||
+       |||
+       |||
+       |||
+    ___|||___
+   /   |||   \
+  /    |||    \
+ |     |||     |
+  \   (|||)   /
+   |   |||   |
+  /    |||    \
+ /     |||     \
+/      |||      \
+|     [===]     |
+ \             /
+  '.         .'
+    '-------'
+    enjoy life
+$
+!
+int gi0/0
+ description iBGP: 65200_R1
+ ip address 10.2.13.3 255.255.255.0
+ no shutdown
+ exit
+!
+int gi0/1
+ description iBGP: 65200_R2
+ ip address 10.2.23.3 255.255.255.0
+ no shutdown
+ exit
+!
+int gi0/2
+ description iBGP: 65200_R4
+ ip address 10.2.34.3 255.255.255.0
+ no shutdown
+ exit
+!
+int g0/3
+ description DISABLED
+ shutdown
+ exit
+!
+int lo0
+ description Router-ID
+ ip address 10.65.2.3 255.255.255.255
+ no shutdown
+ exit
+!
+router bgp 65200
+ network 10.65.2.3 mask 255.255.255.255
+ network 10.2.0.0 mask 255.255.0.0
+ neighbor 10.2.13.1 remote-as 65200
+ neighbor 10.2.23.2 remote-as 65200
+ neighbor 10.2.34.4 remote-as 65200
+ exit
+!
+exit
+copy run start
