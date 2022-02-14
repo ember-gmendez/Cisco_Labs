@@ -90,9 +90,12 @@ router ospf 65300
  network 10.3.67.0 0.0.0.255 area 1
  exit
 !
-router bgp 65300
+router bgp 57
+ bgp confederation identifier 65300
  network 10.65.3.7 mask 255.255.255.255
  network 10.3.0.0 mask 255.255.0.0
+ neighbor 10.3.67.6 remote-as 57
+ neighbor 10.3.57.5 remote-as 57
  exit
 !
 exit
