@@ -60,6 +60,7 @@ $
 int gi0/0
  description iBGP: 65300_R5
  ip address 10.3.56.6 255.255.255.0
+ no shutdown
  exit
 !
 int gi0/1
