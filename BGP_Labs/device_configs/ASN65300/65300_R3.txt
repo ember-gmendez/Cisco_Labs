@@ -60,6 +60,7 @@ $
 int gi0/0
  description iBGP: 65300_R1
  ip address 10.3.13.3 255.255.255.0
+ no shutdown
  exit
 !
 int gi0/1
@@ -87,7 +88,9 @@ int lo0
  exit
 !
 router ospf 65300
- network 10.3.0.0 0.0.255.255 area 0
+ network 10.3.13.0 0.0.0.255 area 0
+ network 10.3.23.0 0.0.0.255 area 0
+ network 10.3.34.0 0.0.0.255 area 0
  exit
 !
 router bgp 14

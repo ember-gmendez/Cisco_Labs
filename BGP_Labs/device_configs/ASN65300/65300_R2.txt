@@ -88,7 +88,10 @@ int lo0
  exit
 !
 router ospf 65300
- network 10.3.0.0 0.0.255.255 area 0
+ network 10.3.12.0 0.0.0.255 area 0
+ network 10.3.23.0 0.0.0.255 area 0
+ network 10.3.24.0 0.0.0.255 area 0
+ network 10.3.25.0 0.0.0.255 area 0
  exit
 !
 router bgp 14
