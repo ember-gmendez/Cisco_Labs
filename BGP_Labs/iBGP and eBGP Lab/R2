@@ -59,7 +59,7 @@ $
 !
 int gi0/0
  description eBGP: R1
- ip address 10.12.0.1 255.255.255.252
+ ip address 10.12.0.2 255.255.255.252
  no shutdown
  exit
 !
