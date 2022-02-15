@@ -1,0 +1,86 @@
+ASN234 R3
+
+enable
+config t
+!
+hostname R3
+!
+no ip domain-lookup
+ip domain-name ibgp.lab
+!
+enable secret cisco
+username admin priv 15 secret cisco
+!
+crypto key generate rsa modulus 2048
+ip ssh version 2
+!
+line con 0
+ logg synch
+ login local
+ exec-timeout 10 0
+ exit
+!
+line vty 0 4
+ logg synch
+ login local
+ transport input ssh
+ exec-timeout 10 0
+ exit
+!
+no banner login
+no banner exec
+no banner incoming
+!
+banner motd $
+      _____
+     o|* *|o
+     o|* *|o
+     o|* *|o
+      \===/
+       |||
+       |||
+       |||
+       |||
+    ___|||___
+   /   |||   \
+  /    |||    \
+ |     |||     |
+  \   (|||)   /
+   |   |||   |
+  /    |||    \
+ /     |||     \
+/      |||      \
+|     [===]     |
+ \             /
+  '.         .'
+    '-------'
+    enjoy life
+$
+!
+int gi0/0
+ description iBGP: R2
+ ip address 10.234.23.3 255.255.255.248
+ no shutdown
+ exit
+!
+int gi0/1
+ description iBGP: R4
+ ip address 10.234.34.3 255.255.255.248
+ no shutdown
+ exit
+!
+int lo0
+ description Router-ID
+ ip address 3.3.3.3 255.255.255.255
+ no shutdown
+ exit
+!
+router bgp 234
+ network 10.234.23.0 mask 255.255.255.248
+ network 3.3.3.3 mask 255.255.255.255
+ neighbor 10.234.23.2 remote-as 234
+ neighbor 10.234.34.4 remote-as 234
+ exit
+!
+exit
+copy run start
